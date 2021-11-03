@@ -227,7 +227,7 @@ export class AppService {
       if (every(resultWithOutNil, (o) => eq('isTimeout', o) || eq('maxRedirects', o) || eq('tooManyRequests', o))) {
         delayIndex++;
         if (delayIndex > 5) {
-          await this.delay(1500)
+          await this.delay(1000)
           delayIndex = 0
         }
       }
