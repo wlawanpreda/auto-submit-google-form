@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { get, set, map, includes, every, eq, join, reject, isNil, remove } from 'lodash'
+import { get, set, map, includes, every, eq, join, reject, isNil, remove, random } from 'lodash'
 import axios from 'axios';
 import { URLSearchParams } from 'url'
 import { Cron } from '@nestjs/schedule';
@@ -13,7 +13,7 @@ export class AppService {
   // https://t.ly/o60b
 
   @Cron('0 16 * * *')
-  async production0(): Promise<string> {
+  async production0(): Promise<any> {
 
     const attr1 = ['บษ8179', 'ฒส8062']
     const attr2 = ['BKK (กทม. และปริมณฑล)', 'UPC (ต่างจังหวัด)']
@@ -30,13 +30,10 @@ export class AppService {
 
     const payloads = this.formatPayloads(data)
     await this.action(payloads)
-
-    this.logger.log('production0 KPLC done!!!')
-    return 'production0 KPLC done!!!'
   }
 
   @Cron('0 16 * * *')
-  async production1(): Promise<string> {
+  async production1(): Promise<any> {
 
     const attr1 = ['บษ8179', 'ฒส8062']
     const attr2 = ['BKK (กทม. และปริมณฑล)', 'UPC (ต่างจังหวัด)']
@@ -53,13 +50,10 @@ export class AppService {
 
     const payloads = this.formatPayloads(data)
     await this.action(payloads)
-
-    this.logger.log('production1 KPLC2 done!!!')
-    return 'production1 KPLC2 done!!!'
   }
 
   @Cron('0 16 * * *')
-  async production2(): Promise<string> {
+  async production2(): Promise<any> {
 
     const attr1 = ['บษ8179', 'ฒส8062']
     const attr2 = ['BKK (กทม. และปริมณฑล)', 'UPC (ต่างจังหวัด)']
@@ -83,37 +77,31 @@ export class AppService {
 
     const payloads = this.formatPayloads(data)
     await this.action(payloads)
-
-    this.logger.log('production2 KBLC done!!!')
-    return 'production2 KBLC done!!!'
   }
 
-  @Cron('0 16 * * *')
-  async production3(): Promise<string> {
+  // @Cron('0 16 * * *')
+  // async production3(): Promise<any> {
 
-    const attr1 = ['บษ8179', 'ฒส8062']
-    const attr2 = ['BKK (กทม. และปริมณฑล)', 'UPC (ต่างจังหวัด)']
+  //   const attr1 = ['บษ8179', 'ฒส8062']
+  //   const attr2 = ['BKK (กทม. และปริมณฑล)', 'UPC (ต่างจังหวัด)']
 
-    const data = [
-      // https://docs.google.com/forms/d/e/1FAIpQLSeTxEGwORy8NnJ20r3NcTBHkGU0HL3wI4Mzg7chl4K0C0_4vA/viewform
-      { 
-        type: 'KSLC',
-        record: [[attr1[1], attr2[1]]],
-        url: '1FAIpQLSeTxEGwORy8NnJ20r3NcTBHkGU0HL3wI4Mzg7chl4K0C0_4vA', 
-        attr: [1405683895, 2062313074, 1013496111, 953475437, 622068130]
-      },
-    ]
+  //   const data = [
+  //     // https://docs.google.com/forms/d/e/1FAIpQLSeTxEGwORy8NnJ20r3NcTBHkGU0HL3wI4Mzg7chl4K0C0_4vA/viewform
+  //     { 
+  //       type: 'KSLC',
+  //       record: [[attr1[1], attr2[1]]],
+  //       url: '1FAIpQLSeTxEGwORy8NnJ20r3NcTBHkGU0HL3wI4Mzg7chl4K0C0_4vA', 
+  //       attr: [1405683895, 2062313074, 1013496111, 953475437, 622068130]
+  //     },
+  //   ]
 
-    const payloads = this.formatPayloads(data)
-    await this.action(payloads)
-
-    this.logger.log('production3 KSLC done!!!')
-    return 'production3 KSLC done!!!'
-  }
+  //   const payloads = this.formatPayloads(data)
+  //   await this.action(payloads)
+  // }
 
 
   @Cron('0 17 * * *')
-  async production4(): Promise<string> {
+  async production4(): Promise<any> {
 
     const attr1 = ['บษ8179', 'ฒส8062']
     const attr2 = ['BKK (กทม. และปริมณฑล)', 'UPC (ต่างจังหวัด)']
@@ -130,9 +118,6 @@ export class AppService {
 
     const payloads = this.formatPayloads(data)
     await this.action(payloads)
-
-    this.logger.log('production4 MTPR done!!!')
-    return 'production4 MTPR done!!!'
   }
 
   async dev(): Promise<string> {
@@ -144,7 +129,7 @@ export class AppService {
       // https://docs.google.com/forms/u/0/d/e/1FAIpQLScUmK07U_4I6-EPL3wHigsPFnYsrlARyzyYp9Ey0x9JMxFvCg/viewform
       { 
         type: 'TEST',
-        record: [[attr1[0], attr2[1]], [attr1[0], attr2[1]]],
+        record: [[attr1[0], attr2[0]], [attr1[1], attr2[0]], [attr1[0], attr2[1]], [attr1[1], attr2[1]]],
         url: '1FAIpQLScUmK07U_4I6-EPL3wHigsPFnYsrlARyzyYp9Ey0x9JMxFvCg', 
         attr: [1053918869, 947528896, 577629461, 1893458426, 1652847675]
       },
@@ -153,7 +138,6 @@ export class AppService {
     const payloads = this.formatPayloads(data)
     this.action(payloads)
 
-    this.logger.log('dev done!!!')
     return 'dev done!!!'
   }
 
@@ -174,29 +158,37 @@ export class AppService {
     return payloads
   }
 
-  async action(payloads) {
+  async action(payloads, name = random(0, 99999)) {
     
     let index = 1;
     let doAgain = false;
     let delayIndex = 0;
     do {
+      // console.time(`⏰ ${name} ~ ${index}`)
       const actions = map(payloads, async ({ _id, url, payload }) => {  
         try {
-          
           const params = new URLSearchParams(payload);       
-          const response = await axios.post(url, params, { timeout: 1000 });
-          if (!eq(200, get(response, 'status')) || !eq('OK', get(response, 'statusText')))
-            this.logger.debug(`🚀 ${_id} status: ${get(response, 'status')}, statusText: ${get(response, 'statusText')}`);
+          const response = await axios.post(url, params, { timeout: 3000 });
+          if (!eq(200, get(response, 'status')) || !eq('OK', get(response, 'statusText'))) {
+            this.logger.error(`👌${name}👌 ${_id} status: ${get(response, 'status')}, statusText: ${get(response, 'statusText')}`);
+          }
 
-            const status = includes(get(response, 'data', ''), 'ลงคิวเรียบร้อยแล้วค่ะ')
-            const notOpen = includes(get(response, 'data', ''), 'สามารถลงคิวได้ตอน 16:00 น. นะค่ะ ^^') || includes(get(response, 'data', ''), 'สามารถลงคิวได้ตอน 17:00 น. นะค่ะ ^^')
+          const status = includes(get(response, 'data', ''), 'ลงคิวเรียบร้อยแล้วค่ะ')
+          const notOpen = includes(get(response, 'data', ''), 'สามารถลงคิวได้ตอน 16:00 น. นะค่ะ ^^') || includes(get(response, 'data', ''), 'สามารถลงคิวได้ตอน 17:00 น. นะค่ะ ^^')
 
-            if (status && !notOpen) {
-              console.log(`🚀 ~ file: app.service.ts ~ line 140 ~ AppService ~ actions ~ _id: ${_id}, status: ${status}, notOpen: ${notOpen}`)
-              remove(payloads, ['_id', _id])
-            }
+          if (status && !notOpen) {
+            this.logger.log(`🤡${name}🤡~ file: app.service.ts ~ AppService ~ actions ~ _id: ${_id}, status: ${status}, notOpen: ${notOpen}`)
+            remove(payloads, ['_id', _id])
+            return `${_id}#ALREADY_SUBMIT`
+          }
 
-            const code = get(response, 'status')
+          const code = get(response, 'status')
+
+          if (!status && notOpen) {
+            return `${_id}#FORM_NOT_OPEN`
+          }
+          
+          
           return { _id, status, notOpen, code }
         } catch (error) {
           const maxRedirects = eq('Error [ERR_FR_TOO_MANY_REDIRECTS]: Maximum number of redirects exceeded', error.toString()) 
@@ -214,25 +206,27 @@ export class AppService {
             return 'tooManyRequests'
           }
           
-          this.logger.log(`\n🚀 ~ file: app.service.ts ~ line 177 ~ AppService ~ actions ~ error.toString() ${error.toString()}\n`)
-          // this.logger.debug(`🚀 ~ file: app.service.ts ~ line 146 ~ AppService ~ actions ~ error ${JSON.stringify(error)}`)
+          this.logger.error(`🚀${name}🚀 ~ file: app.service.ts ~ line 177 ~ AppService ~ actions ~ error.toString() ${error.toString()}\n`)
           return null
         }
       })
 
       const result = await Promise.all(actions)
       const resultWithOutNil = reject(result, isNil)
-      this.logger.debug(`🚀 ~ AppService ~ ${index++} ${JSON.stringify(resultWithOutNil)}`)
+      this.logger.debug(`🚀${name}🚀 ~ AppService ~ ${index} ${JSON.stringify(resultWithOutNil)}`)
 
       if (every(resultWithOutNil, (o) => eq('isTimeout', o) || eq('maxRedirects', o) || eq('tooManyRequests', o))) {
         delayIndex++;
-        if (delayIndex > 5) {
-          await this.delay(1000)
+        if (delayIndex > 3) {
+          this.logger.error(`👌${name}👌 delay 2 sec`);
+          await this.delay(2000)
           delayIndex = 0
         }
       }
 
       doAgain = get(resultWithOutNil, 'length') > 0 && index < (60 * 15)
+      // console.timeEnd(`⏰ ${name} ~ ${index}`)
+      index++
     } while (doAgain);
 
   }
